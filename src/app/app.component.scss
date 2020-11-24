@@ -1,0 +1,128 @@
+@import "header/header.component";
+
+.content {
+  height: 78vh;
+}
+
+.background {
+  background-color: aquamarine;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.blockClick {
+  pointer-events: none;
+}
+
+.reactiveClick {
+  pointer-events: auto;
+}
+
+img {
+  cursor: pointer;
+  height: 6rem;
+  width: 4rem;
+  padding: 0.2rem;
+}
+
+.table {
+  display: table;
+  margin: auto;
+}
+
+.td_center {
+  padding: 0.5rem !important;
+  text-align: center;
+}
+
+.records {
+  overflow-y: scroll;
+  max-height: 60vh;
+  margin: 0 6rem;
+}
+
+.card {
+  padding: 10px;
+}
+
+.card_score {
+  height: 40%;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+
+.card_total {
+  height: 20%;;
+}
+
+.in_content {
+  border-style: dotted;
+  border-color: darkslategrey;
+  height: 100%;
+}
+
+.in_card {
+  border-style: dotted;
+  border-color: darkslategrey;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+}
+
+.miw {
+  background-image:  url(https://avatars0.githubusercontent.com/u/5365410?s=460&v=4);
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 4rem;
+  min-height: 1.7rem;
+  background-size: 100%;
+}
+
+.upm {
+  position: absolute;
+  background-image:  url(https://landportal.org/sites/landportal.org/files/styles/220heightmax/public/LogoUPM.png?itok=7tRHb6Zl);
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 4rem;
+  min-height: 6rem;
+  background-size: 100%;
+}
+
+.upm-left {
+  top: 0;
+  left: 1rem;
+}
+
+.upm-right {
+  bottom: 0;
+  right: 1rem;
+}
+
+.cards {
+  background-image:  url(https://1.bp.blogspot.com/-E27finyDPP4/XRDkRi-KlkI/AAAAAAAABJU/-EqTNzYnvTQBiHyxscKaxdytkjiHqk4qQCLcBGAs/s640/barajaespanola2.png);
+  background-repeat: no-repeat;
+  bottom: 0.5rem;
+  left: 3rem;
+  min-width:11rem;
+  min-height: 11rem;
+  background-size: 100%;
+}
+
+@font-face {
+  font-family: title_font;
+  font-style: italic;
+  font-weight: 300;
+  src: local('Zilla Slab Light Italic'), local('ZillaSlab-LightItalic'), url(https://fonts.gstatic.com/s/zillaslab/v6/dFanZfeM_74wlPZtksIFaj8CVHaZWXB3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.title {
+  top: 0.7rem;
+  font-family: title_font;
+}
+
+

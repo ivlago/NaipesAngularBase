@@ -1,0 +1,11 @@
+app-header{
+  i {
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+  }
+  i:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
