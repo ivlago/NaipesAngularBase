@@ -9,7 +9,7 @@
         <form id="preferencesForm">
           <p class="text-right">
             <label  class="title_font" for="users"> Usuario: </label>
-            <input id="users" type="text" placeholder="  Identificador usuario" required>
+            <input id="users" name="users" type="text" placeholder="  Identificador usuario" required>
           </p>
           <p class="text-right">
             <label for="emails"> Correo:  </label>
@@ -23,7 +23,7 @@
             <label for="keyRepeat"> Repita la clave:  </label>
             <input id="keyRepeat" type="text" placeholder="  Repita la clave" required >
           </p>
-          <button class="btn btn-info" type="submit"> Aceptar </button>
+          <button class="btn btn-info" type="button" (click)="register()"> Aceptar </button>
         </form>
         <div class="position-absolute upm upm-right"></div>
       </div>

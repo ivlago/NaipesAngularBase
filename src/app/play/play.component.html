@@ -1,20 +1,24 @@
-<div id="gameModal" class="modal" tabindex="-1" role="dialog">
+<ng-template id="gameModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="titleModal" class="modal-title"> </h5>
+        <h5 id="titleModal" class="modal-title"> {{ msg }} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div id="contentModal" class="modal-body text-center"></div>
+      <div id="contentModal" class="modal-body text-center">
+        'Tu puntuación ha sido: ' {{ this.points }}  '\n ¿Quieres volver a jugar?'
+      </div>
       <div class="modal-footer justify-content-center">
-        <button id="acceptModal" type="button" class="btn btn-primary" data-dismiss="modal"> Aceptar </button>
-        <button id="cancelModal" type="button" class="btn btn-secondary" data-dismiss="modal"> Cerrar </button>
+        <button id="acceptModal" type="button" class="btn btn-primary" data-dismiss="modal"
+                routerLink="/play"> Aceptar </button>
+        <button id="cancelModal" type="button" class="btn btn-secondary" data-dismiss="modal"
+                routerLink="/home"> Cerrar </button>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
 
 <div class="container">
   <div class="row mb-3 justify-content-center">
@@ -23,24 +27,37 @@
         <div class="grid m-3 w-100 text-center align-items-center">
           <div class="mb-2">
             <p class=""> Puntuacion </p>
-            <p id="point" class="font-weight-bold"> -- </p>
+            <p id="point" class="font-weight-bold"> {{ points }} </p>
           </div>
           <div class="mt-2">
             <p class=""> Tiempo </p>
-            <p id="userTime" class="font-weight-bold"> -- </p>
+            <p id="userTime" class="font-weight-bold">
+              <ng-container *ngIf="timePref !== 0"> {{ seconds }} </ng-container>
+              <ng-container *ngIf="timePref === 0"> ∞ </ng-container>
+            </p>
           </div>
         </div>
       </div>
       <div class="row mr-3 in_card rounded background card_total">
         <div class="m-3 w-100 text-center align-items-center">
           <p class=""> Total </p>
-          <p id="totalPoints" class="font-weight-bold"> -- </p>
+          <p id="totalPoints" class="font-weight-bold"> {{ points }} </p>
         </div>
       </div>
     </div>
     <div class="col-9">
-      <div class="mt-2">
-        <div id="table" class="container table rounded background"></div>
+      <div class="mt-4 h-100">
+<!--        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100">-->
+        <div id="table" class="container table rounded background h-100">
+          <ng-container *ngFor="let card of cardSrc; let numCard = index">
+            {{numCard}}
+            <tr>
+              <ng-container>
+                <td (click)="onclickCard(numCard)"><img src="assets/reverso.jpg"></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>

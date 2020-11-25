@@ -9,11 +9,13 @@
         <form id="preferencesForm">
           <p class="text-right">
             <label for="numPref"> Numero de imagenes:   </label>
-            <input id="numPref" name="numPref" type="number" value="20" step="6" min="20" max="32" required>
+            <input id="numPref" name="numPref" type="number" value="20" step="6" min="20" max="32"
+                   [(ngModel)]="cardsPref" required>
           </p>
           <p class="text-right">
             <label for="timePref"> Tiempo maximo:   </label>
-            <input id="timePref" name="timePref" value="0" list="defaultNumbers" required>
+            <input id="timePref" name="timePref" value="0" list="defaultNumbers"
+                    [(ngModel)]="timePref" required>
             <datalist id="defaultNumbers">
               <option value="0">
               <option value="60">
@@ -23,7 +25,7 @@
               <option value="150">
             </datalist>
           </p>
-          <button id="btnPref" type="button" class="btn btn-info"> Aceptar </button>
+          <button id="btnPref" type="button" class="btn btn-info" (click)="preferences()" routerLink="/play"> Aceptar </button>
         </form>
         <div class="position-absolute upm upm-right"></div>
       </div>
