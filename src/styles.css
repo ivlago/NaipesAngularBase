@@ -38,7 +38,7 @@ img {
 .records {
   overflow-y: scroll;
   max-height: 60vh;
-  margin: 0 6rem; }
+  margin: 0 0.5rem; }
 
 .card {
   padding: 10px; }

@@ -6,24 +6,25 @@
         <h3 class="title position-absolute">
           <strong><em> Registro de usuarios </em></strong>
         </h3>
-        <form id="preferencesForm">
+        <form id="preferencesForm" [formGroup]="user">
           <p class="text-right">
             <label  class="title_font" for="users"> Usuario: </label>
-            <input id="users" name="users" type="text" placeholder="  Identificador usuario" required>
+            <input id="users" name="users" type="text" placeholder="  Identificador usuario"
+                   formControlName="name" required>
           </p>
           <p class="text-right">
             <label for="emails"> Correo:  </label>
-            <input id="emails" type="text" placeholder="  Email" required >
+            <input id="emails" type="text" placeholder="  Email" formControlName="email" required >
           </p>
           <p class="text-right">
             <label for="keys"> Clave: </label>
-            <input id="keys" type="text" placeholder="  Clave" required >
+            <input id="keys" type="text" placeholder="  Clave" formControlName="password" required >
           </p>
           <p class="text-right">
             <label for="keyRepeat"> Repita la clave:  </label>
-            <input id="keyRepeat" type="text" placeholder="  Repita la clave" required >
+            <input id="keyRepeat" type="text" placeholder="  Repita la clave" formControlName="password2" required >
           </p>
-          <button class="btn btn-info" type="button" (click)="register()"> Aceptar </button>
+          <button class="btn btn-info" type="button" (click)="sendRegister()"> Aceptar </button>
         </form>
         <div class="position-absolute upm upm-right"></div>
       </div>

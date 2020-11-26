@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {LoginComponent} from "../login/login.component";
+import {TokenService} from "../token.service";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public tokenService: TokenService) { }
 
   ngOnInit(): void {
   }
-
 }

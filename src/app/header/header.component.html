@@ -27,8 +27,14 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a id="register" class="nav-link pointer" routerLink="/register">
         <i class="fas fa-user-tag"></i> Registro </a></li>
-      <li><a id="login" class="nav-link pointer" routerLink="/login">
-        <i class="fas fa-sign-in-alt"></i> Login </a></li>
+      <ng-container *ngIf="!tokenService.exist">
+        <li><a id="login" class="nav-link pointer" routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i> Login </a></li>
+      </ng-container>
+      <ng-container *ngIf="tokenService.exist">
+        <li><a id="logout" class="nav-link pointer" (click)="tokenService.destroyToken()">
+          <i class="fas fa-sign-in-alt"></i> Logout </a></li>
+      </ng-container>
     </ul>
   </nav>
 </header>

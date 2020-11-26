@@ -6,17 +6,22 @@
         <h3 class="title position-absolute">
           <strong><em> Identificación de usuario </em></strong>
         </h3>
-        <form id="preferencesForm">
+        <form id="loginForm" [formGroup]="login">
           <p class="text-right">
             <label for="userLog"> Usuario:   </label>
-            <input id="userLog" type="text" placeholder="  Identificador usuario" required>
+            <input id="userLog" type="text" placeholder="  Identificador usuario"
+                   formControlName="nameLog" required>
           </p>
           <p class="text-right">
             <label for="keyLog"> Clave:   </label>
-            <input id="keyLog" type="text" placeholder="  Password" required>
+            <input id="keyLog" type="text" placeholder="  Password" formControlName="passwordLog" required>
           </p>
-          <button class="btn btn-info" type="submit" onclick="userStorage()"> Enviar </button>
+          <ng-container *ngIf="error">
+            <p> Usuario o contraseña incorrectas </p>
+          </ng-container>
+          <button class="btn btn-info" type="button" (click)="userLogin()"> Enviar </button>
         </form>
+
         <div class="position-absolute upm upm-right"></div>
       </div>
     </div>

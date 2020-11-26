@@ -47,13 +47,14 @@
     </div>
     <div class="col-9">
       <div class="mt-4 h-100">
-<!--        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100">-->
-        <div id="table" class="container table rounded background h-100">
+        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100">
+<!--        <div id="table" class="container table rounded background h-100">-->
           <ng-container *ngFor="let card of cardSrc; let numCard = index">
-            {{numCard}}
             <tr>
               <ng-container>
-                <td (click)="onclickCard(numCard)"><img src="assets/reverso.jpg"></td>
+                <td (click)="onclickCard(numCard)">
+                  <img src="{{imgSrc[numCard]}}">
+                </td>
               </ng-container>
             </tr>
           </ng-container>
