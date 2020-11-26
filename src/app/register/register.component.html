@@ -10,8 +10,9 @@
           <p class="text-right">
             <label  class="title_font" for="users"> Usuario: </label>
             <input id="users" name="users" type="text" placeholder="  Identificador usuario"
-                   formControlName="name" required>
+                   formControlName="username" required>
           </p>
+<!--          <ng-container *ngIf="nameUser.length < 8"><p> El nombre de usuario debe tener longitud de 8 </p></ng-container>-->
           <p class="text-right">
             <label for="emails"> Correo:  </label>
             <input id="emails" type="text" placeholder="  Email" formControlName="email" required >
@@ -24,7 +25,10 @@
             <label for="keyRepeat"> Repita la clave:  </label>
             <input id="keyRepeat" type="text" placeholder="  Repita la clave" formControlName="password2" required >
           </p>
-          <button class="btn btn-info" type="button" (click)="sendRegister()"> Aceptar </button>
+          <ng-container *ngIf="menssageError !== ''"><p> {{ menssageError }}</p></ng-container>
+          <!--[ngClass]="{'disabled': nameUser.length < 8,
+                  'not_disabled': nameUser.length > 8}"-->
+          <button class="btn btn-info" type="button"  (click)="sendRegister()"> Aceptar </button>
         </form>
         <div class="position-absolute upm upm-right"></div>
       </div>

@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserService implements OnInit{
   private baseurl: string = 'http://fenw.etsisi.upm.es:10000';
+  public userLog: string;
 
   constructor(private http: HttpClient) {
   }
@@ -15,12 +16,11 @@ export class UserService implements OnInit{
   }
 
   public registerService(user: any) {
-    return this.http.post(this.baseurl + '/users', 'username=' + user['name'] + ' &email=' +
-                       user['email'] + '&password=' + user['password']);
-    //"username=user&email=email&password=password"
+    return this.http.post(this.baseurl + '/users', user);
   }
 
   public userLoginService(login: any) {
+    this.userLog = login['nameLog'];
     return this.http.get(this.baseurl + '/users/login?username=' + login['nameLog'] +
                           '&password=' + login['passwordLog']);
   }

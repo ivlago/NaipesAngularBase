@@ -1,7 +1,5 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {Subject} from "rxjs";
-import {Preferences} from "./preferences.component.model";
-import {PreferencesService} from "./preferences.service";
+import { Component, OnInit } from '@angular/core';
+import { PreferencesService } from "./preferences.service";
 
 @Component({
   selector: 'app-preferences',

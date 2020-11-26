@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {Preferences} from "../preferences/preferences.component.model";
 import {RecordsService} from "../records.service";
 import {TokenService} from "../token.service";
+import {PreferencesService} from "../preferences/preferences.service";
 
 @Component({
   selector: 'app-play',
@@ -11,7 +12,8 @@ import {TokenService} from "../token.service";
 })
 export class PlayComponent implements OnInit {
   @ViewChild('gameModal') gameModal: ElementRef;
-  public Pref$: Subject<Preferences> = new Subject<Preferences>();
+  //public Pref$: Subject<Preferences> = new Subject<Preferences>();
+  public Pref$: Observable<Preferences>;
   public cardsPref: number;
   public timePref: number;
   public points = 0;
@@ -34,10 +36,12 @@ export class PlayComponent implements OnInit {
 
 
   constructor(private recordsService: RecordsService,
-              private tokenService: TokenService) {  }
+              private tokenService: TokenService,
+              private prefService: PreferencesService) {  }
 
   ngOnInit(): void {
-    this.Pref$.asObservable().subscribe( value => {
+    this.Pref$ = this.prefService.getPreferences$();
+    this.Pref$.subscribe( value => {
       console.log("value: " + value);
       this.cardsPref = value.cards;
       this.timePref = value.time;
@@ -47,7 +51,7 @@ export class PlayComponent implements OnInit {
     this.cardsPref === undefined ? this.cardsPref = 20 : this.cardsPref;
     this.cardsPref === 20 ? this.differentPairs = 5 :
       this.cardsPref === 26 ? this.differentPairs = 6 : this.differentPairs = 8;
-    this.timePref = 3;
+    //this.timePref = 3;
     console.log('pref: ' + this.cardsPref + ' ' + this.timePref);
 
     this.createTable();
@@ -92,6 +96,7 @@ export class PlayComponent implements OnInit {
 
   public onclickCard(id){
     this.imgSrc[id] = this.cardSrc[id];
+    this.endGame();
 
     if (this.pair !== false){
       if (this.cardSrc[id] === this.cardPlay.src) {
@@ -143,13 +148,14 @@ export class PlayComponent implements OnInit {
 
     if (this.tokenService.exist) {
       //Modal permita elegir si aceptas
-      this.recordsService.newRecordService(this.points, this.cardsPref, this.timePref).subscribe(
+      this.recordsService.newRecordService(this.tokenService.token, this.points, this.cardsPref, this.timePref).subscribe(
         value => {
           console.log(value)
         }
       )
     }
 
+    //this.gameModal.nativeElement.show();
     //setTimeout(function() {
       //$("#gameModal").modal("show");
     //}, 1000);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +14,26 @@ export class RecordsService {
     return this.http.get(this.baseurl + '/records');
   }
 
-  public userTopTenService() {
-    return this.http.get(this.baseurl + '/records');
+  public userTopTenService(userLog: string, token: string) {
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+                                .set('Authorization', token)
+    };
+    return this.http.get(this.baseurl + '/records/' + userLog, options);
   }
 
-  public newRecordService(points: number, cards: number, time: number) {
+  public newRecordService(token: string, points: number, cards: number, time: number) {
     return this.http.post(this.baseurl + '/records', 'punctuation=' + points + '&cards=' +
                             cards + '&disposedTime=' + time);
     // "punctuation=12&cards=13&disposedTime=14"
   }
 
-  public deleteUserRecordsService() {
-    return this.http.delete(this.baseurl + '/records');
+  public deleteUserRecordsService(token: string) {
+    console.log('borra userRegister');
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+                                .set('Authorization', token)
+    };
+    return this.http.delete(this.baseurl + '/records', options);
   }
 }

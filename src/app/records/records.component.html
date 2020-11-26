@@ -32,37 +32,40 @@
         </div>
       </div>
     </div>
-    <div class="col-6 m-3 p-3 rounded content background">
-      <div class="col-12 p-1 text-center text-dark in_content align-items-center justify-content-center content">
-        <h3 class="row title text-center justify-content-center">
-          <strong><em> Records usuario </em></strong>
-        </h3>
-        <div class="row pt-2 justify-content-center records">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Ptos.</th>
-              <th scope="col">Cartas</th>
-              <th scope="col">Seg.</th>
-              <th scope="col">Fecha</th>
-            </tr>
-            </thead>
-            <tbody id="userRecords_body">
-            <ng-container *ngFor="let record of records; let i=index">
+    <ng-container *ngIf="userRecords !== undefined">
+      <div class="col-6 m-3 p-3 rounded content background">
+        <div class="col-12 p-1 text-center text-dark in_content align-items-center justify-content-center content">
+          <h3 class="row title text-center justify-content-center">
+            <strong><em> Records usuario </em></strong>
+            <button id="btnPref" type="button" class="btn btn-info" (click)="borrarUserRecords()"> Borrar </button>
+          </h3>
+          <div class="row pt-2 justify-content-center records">
+            <table class="table table-striped">
+              <thead>
               <tr>
-                <th scope="col">{{ i+1 }}</th>
-                <th scope="col">{{ record['username'] }}</th>
-                <th scope="col">{{ record['punctuation'] }}</th>
-                <th scope="col">{{ record['cards'] }}</th>
-                <th scope="col">{{ record['disposedTime'] }}</th>
-                <th scope="col">{{ record['recordDate'] }}</th>
+                <th scope="col">#</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Ptos.</th>
+                <th scope="col">Cartas</th>
+                <th scope="col">Seg.</th>
+                <th scope="col">Fecha</th>
               </tr>
-            </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody id="userRecords_body">
+              <ng-container *ngFor="let record of userRecords; let i=index">
+                <tr>
+                  <th scope="col">{{ i+1 }}</th>
+                  <th scope="col">{{ record['username'] }}</th>
+                  <th scope="col">{{ record['punctuation'] }}</th>
+                  <th scope="col">{{ record['cards'] }}</th>
+                  <th scope="col">{{ record['disposedTime'] }}</th>
+                  <th scope="col">{{ record['recordDate'] }}</th>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>

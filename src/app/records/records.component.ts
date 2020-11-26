@@ -1,5 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RecordsService} from "../records.service";
+import {UserService} from "../user.service";
+import {TokenService} from "../token.service";
 
 @Component({
   selector: 'app-records',
@@ -8,9 +10,12 @@ import {RecordsService} from "../records.service";
 })
 export class RecordsComponent implements OnInit, OnDestroy {
   public records: [Object];
+  public userRecords;
   private subscriptions = [];
 
-  constructor(private recordsService: RecordsService) { }
+  constructor(private recordsService: RecordsService,
+              private userService: UserService,
+              private tokenService: TokenService) { }
 
   ngOnInit(): void {
     const topTen = this.recordsService.topTenService().subscribe(
@@ -26,12 +31,24 @@ export class RecordsComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(topTen);
 
-    const userTopTen = this.recordsService.userTopTenService().subscribe(
-      value => {
-        console.log(value)
-      }
-    )
-    this.subscriptions.push(userTopTen);
+    if (this.userService.userLog !== undefined) {
+      let token = this.tokenService.getToken();
+      const userTopTen = this.recordsService.userTopTenService(this.userService.userLog, token).subscribe(
+        value => {
+          this.userRecords = value;
+          for (let ur of this.userRecords) {
+            let date = new Date(ur['recordDate']);
+            let recordDate = date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear();
+            ur['recordDate'] = recordDate;
+          }
+        }
+      )
+      this.subscriptions.push(userTopTen);
+    }
+  }
+
+  public borrarUserRecords() {
+    this.recordsService.deleteUserRecordsService(this.tokenService.getToken());
   }
 
   ngOnDestroy() : void {

@@ -16,7 +16,7 @@ export class TokenService {
   }
 
   public destroyToken() {
-    console.log("destroy");
+    console.log("destroyToken");
     this.token = '';
     this.exist = false;
     this.router.navigate(['/home']);

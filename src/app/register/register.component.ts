@@ -9,6 +9,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   public user: FormGroup;
+  public menssageError: string;
   private subscriptions = [];
 
   constructor(private registerService: UserService) {
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.user = new FormGroup({
-      name: new FormControl(''),
+      username: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
       password2: new FormControl('')
@@ -24,20 +25,28 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public sendRegister() {
-    if (this.user.value['password'] === this.user.value['password2']) {
-      const register = this.registerService.userService(this.user.value).subscribe(
-        value => {
-          console.log("registro: " + value);
-          ///////////////////////////
-          this.registerService.registerService(this.user.value).subscribe(
-            value1 => {
-              console.log("notrepeat: " + value1);
-              alert('Te has registrado correctamente!');
-            })
+    if (this.user.value['name'] >= 8) {
+      if (this.user.value['password'] === this.user.value['password2']) {
+        const register = this.registerService.userService(this.user.value).subscribe(
+          value => {
+            this.menssageError = '"' + value + '" no está disponible ';
+          }, err => {
+            if (err.status === 404) {
+              this.registerService.registerService(this.user.value).subscribe(
+                value1 => {
+                  console.log("notrepeat: " + value1);
+                  this.menssageError = 'Te has registrado correctamente!';
+                }, err => {
+                  this.menssageError = ' Se ha producido un error en el registro ';
+                })
+            }
         })
-      this.subscriptions.push(register);
-    }else{
-      alert("Contraseñas distintas!");
+        this.subscriptions.push(register);
+      }else{
+        this.menssageError = ' Las contraseñas no son iguales ';
+      }
+  } else {
+      this.menssageError = ' El usuario debe tener una longitud de 8 ';
     }
   }
 
