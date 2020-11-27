@@ -37,9 +37,10 @@
         <div class="col-12 p-1 text-center text-dark in_content align-items-center justify-content-center content">
           <h3 class="row title text-center justify-content-center">
             <strong><em> Records usuario </em></strong>
-            <button id="btnPref" type="button" class="btn btn-info" (click)="borrarUserRecords()"> Borrar </button>
+            <button id="btnPref" type="button" class="btn btn-info ml-1" (click)="borrarUserRecords()"> Borrar </button>
           </h3>
           <div class="row pt-2 justify-content-center records">
+            <ng-container *ngIf="message !== ''"> {{ message }}</ng-container>
             <table class="table table-striped">
               <thead>
               <tr>

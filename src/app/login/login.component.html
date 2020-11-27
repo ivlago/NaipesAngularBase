@@ -19,7 +19,7 @@
           <ng-container *ngIf="error">
             <p> Usuario o contraseña incorrectas </p>
           </ng-container>
-          <button class="btn btn-info" type="button" (click)="userLogin()"> Enviar </button>
+          <button class="btn btn-info" type="button" (click)="userLogin()" [disabled]="login.invalid"> Enviar </button>
         </form>
 
         <div class="position-absolute upm upm-right"></div>

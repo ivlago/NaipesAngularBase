@@ -24,30 +24,36 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
-  public sendRegister() {
-    if (this.user.value['name'] >= 8) {
-      if (this.user.value['password'] === this.user.value['password2']) {
-        const register = this.registerService.userService(this.user.value).subscribe(
-          value => {
-            this.menssageError = '"' + value + '" no está disponible ';
-          }, err => {
-            if (err.status === 404) {
-              this.registerService.registerService(this.user.value).subscribe(
-                value1 => {
-                  console.log("notrepeat: " + value1);
-                  this.menssageError = 'Te has registrado correctamente!';
-                }, err => {
-                  this.menssageError = ' Se ha producido un error en el registro ';
-                })
-            }
+  public userValid() {
+    if (this.user.value['username'].length >= 8) {
+      const userValid = this.registerService.userService(this.user.value).subscribe(
+        value => {
+          this.menssageError = '"' + value + '" no está disponible ';
+        }, err => {
+          if (err.status === 404) {
+            this.menssageError = ' Nombre de usuario válido ';
+          }
         })
-        this.subscriptions.push(register);
-      }else{
-        this.menssageError = ' Las contraseñas no son iguales ';
-      }
-  } else {
+      this.subscriptions.push(userValid);
+    } else {
       this.menssageError = ' El usuario debe tener una longitud de 8 ';
     }
+  }
+
+  public sendRegister() {
+    // if (this.user.value['password'] === this.user.value['password2']) {
+    const register = this.registerService.registerService(this.user.value).subscribe(
+      value1 => {
+        console.log("notrepeat: " + value1);
+        this.menssageError = 'Te has registrado correctamente!';
+      }, err => {
+        err.status === 409 ? this.menssageError = ' Usuario duplicado ' :
+        this.menssageError = ' Se ha producido un error en el registro ';
+      })
+    this.subscriptions.push(register);
+/*  }  else{
+      this.menssageError = ' Las contraseñas no son iguales ';
+    }*/
   }
 
   ngOnDestroy() : void {

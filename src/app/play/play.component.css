@@ -1,3 +1,7 @@
-
+app-play .put_in_table {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around; }
 
 /*# sourceMappingURL=play.component.css.map */

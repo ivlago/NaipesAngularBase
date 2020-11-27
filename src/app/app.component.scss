@@ -1,4 +1,5 @@
 @import "header/header.component";
+@import "play/play.component";
 
 .content {
   height: 78vh;
@@ -100,16 +101,6 @@ img {
 .upm-right {
   bottom: 0;
   right: 1rem;
-}
-
-.cards {
-  background-image:  url(https://1.bp.blogspot.com/-E27finyDPP4/XRDkRi-KlkI/AAAAAAAABJU/-EqTNzYnvTQBiHyxscKaxdytkjiHqk4qQCLcBGAs/s640/barajaespanola2.png);
-  background-repeat: no-repeat;
-  bottom: 0.5rem;
-  left: 3rem;
-  min-width:11rem;
-  min-height: 11rem;
-  background-size: 100%;
 }
 
 @font-face {

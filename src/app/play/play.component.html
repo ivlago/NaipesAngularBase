@@ -47,19 +47,16 @@
     </div>
     <div class="col-9">
       <div class="mt-4 h-100">
-        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100">
+        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100 put_in_table">
 <!--        <div id="table" class="container table rounded background h-100">-->
           <ng-container *ngFor="let card of cardSrc; let numCard = index">
-            <tr>
-              <ng-container>
-                <td (click)="onclickCard(numCard)">
-                  <img src="{{imgSrc[numCard]}}">
-                </td>
-              </ng-container>
-            </tr>
+            <div>
+              <img (click)="onclickCard(numCard)" [id]="numCard" class="cards" src="{{imgSrc[numCard]}}">
+            </div>
           </ng-container>
         </div>
       </div>
     </div>
+    <ng-container *ngIf="saveRecord !== ''"> {{ saveRecord }}</ng-container>
   </div>
 </div>

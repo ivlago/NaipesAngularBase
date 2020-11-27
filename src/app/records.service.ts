@@ -22,9 +22,12 @@ export class RecordsService {
     return this.http.get(this.baseurl + '/records/' + userLog, options);
   }
 
-  public newRecordService(token: string, points: number, cards: number, time: number) {
-    return this.http.post(this.baseurl + '/records', 'punctuation=' + points + '&cards=' +
-                            cards + '&disposedTime=' + time);
+  public newRecordService(token: string, jsonNewRecord: any) {
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token)
+    };
+    return this.http.post(this.baseurl + '/records', jsonNewRecord, options);
     // "punctuation=12&cards=13&disposedTime=14"
   }
 

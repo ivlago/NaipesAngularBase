@@ -11,6 +11,7 @@ import {TokenService} from "../token.service";
 export class RecordsComponent implements OnInit, OnDestroy {
   public records: [Object];
   public userRecords;
+  public message: string = '';
   private subscriptions = [];
 
   constructor(private recordsService: RecordsService,
@@ -48,7 +49,16 @@ export class RecordsComponent implements OnInit, OnDestroy {
   }
 
   public borrarUserRecords() {
-    this.recordsService.deleteUserRecordsService(this.tokenService.getToken());
+    const deleteRecords = this.recordsService.deleteUserRecordsService(this.tokenService.getToken()).subscribe(
+      value => {
+        this.message = 'Datos eliminados correctamente';
+      }, error => {
+        error.status === 401 ? this.message = 'El token no es correcto' :
+        this.message = 'Error al eliminar los datos';
+        console.log(error.status)
+      }
+    );
+    this.subscriptions.push(deleteRecords);
   }
 
   ngOnDestroy() : void {

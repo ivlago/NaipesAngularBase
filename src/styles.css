@@ -6,6 +6,18 @@ app-header i:hover {
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg); }
 
+app-play .put_in_table {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start; }
+app-play .cards {
+  margin: 0.5rem;
+  bottom: 0.5rem;
+  left: 3rem;
+  min-width: 5rem;
+  min-height: 6rem; }
+
 .content {
   height: 78vh; }
 
@@ -88,15 +100,6 @@ img {
 .upm-right {
   bottom: 0;
   right: 1rem; }
-
-.cards {
-  background-image: url(https://1.bp.blogspot.com/-E27finyDPP4/XRDkRi-KlkI/AAAAAAAABJU/-EqTNzYnvTQBiHyxscKaxdytkjiHqk4qQCLcBGAs/s640/barajaespanola2.png);
-  background-repeat: no-repeat;
-  bottom: 0.5rem;
-  left: 3rem;
-  min-width: 11rem;
-  min-height: 11rem;
-  background-size: 100%; }
 
 @font-face {
   font-family: title_font;

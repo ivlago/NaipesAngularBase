@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AACE,sBAAc;EACZ,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,YAAY",
+"sources": ["play.component.scss"],
 "names": [],
 "file": "play.component.css"
 }
