@@ -57,6 +57,14 @@
         </div>
       </div>
     </div>
+    <ng-container *ngIf="tokenService.exist">
+      <div class=" justify-content-center">¿Desea guardar la partida?
+        <button id="accept" type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="restart()"> Aceptar </button>
+        <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal"
+                routerLink="/home"> Cerrar </button>
+      </div>
+    </ng-container>
     <ng-container *ngIf="saveRecord !== ''"> {{ saveRecord }}</ng-container>
   </div>
 </div>

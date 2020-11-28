@@ -34,7 +34,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
 
   constructor(private recordsService: RecordsService,
-              private tokenService: TokenService) {  }
+              public tokenService: TokenService) {  }
 
   ngOnInit(): void {
     this.cardsPref = parseInt(localStorage.getItem('cardsPref'));
@@ -124,6 +124,10 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
+  public restart() {
+    this.ngOnDestroy();
+  }
+
   private endGame() {
     clearInterval(this.timerGame);
     this.points = this.cardsPref === 26 ? this.points + 25 : this.cardsPref === 32 ? this.points + 50 : this.points;
@@ -134,9 +138,6 @@ export class PlayComponent implements OnInit, OnDestroy {
       //setTimeout(function() {
         //this.gameModal.nativeElement.show();
       //}, 1000);
-      /*document.getElementById("acceptModal").addEventListener('click',function () {
-          document.getElementById("play").click();
-        });*/
 
       console.log("newREg")
       let jsonNewRecord = {punctuation: this.points, cards: this.cardsPref, disposedTime: this.disposedTime};
