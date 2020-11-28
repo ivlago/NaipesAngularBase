@@ -25,19 +25,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public userValid() {
-    if (this.user.value['username'].length >= 8) {
-      const userValid = this.registerService.userService(this.user.value).subscribe(
-        value => {
-          this.menssageError = '"' + value + '" no está disponible ';
-        }, err => {
-          if (err.status === 404) {
-            this.menssageError = ' Nombre de usuario válido ';
-          }
-        })
-      this.subscriptions.push(userValid);
-    } else {
-      this.menssageError = ' El usuario debe tener una longitud de 8 ';
-    }
+    const userValid = this.registerService.userService(this.user.value).subscribe(
+      value => {
+        this.menssageError = '"' + value + '" no está disponible ';
+      }, err => {
+        if (err.status === 404) {
+          this.menssageError = ' Nombre de usuario válido ';
+        }
+      })
+    this.subscriptions.push(userValid);
   }
 
   public sendRegister() {

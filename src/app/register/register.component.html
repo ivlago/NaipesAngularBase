@@ -10,7 +10,7 @@
           <p class="text-right">
             <label  class="title_font" for="users"> Usuario: </label>
             <input id="users" name="users" type="text" placeholder="  Identificador usuario"
-                   formControlName="username" (blur)="userValid()" minlength="8" required>
+                   formControlName="username" (blur)="userValid()" maxlength="8" required>
           </p>
           <p class="text-right">
             <label for="emails"> Correo:  </label>

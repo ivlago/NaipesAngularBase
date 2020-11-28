@@ -1,58 +1,50 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Observable} from "rxjs";
 import {Preferences} from "../preferences/preferences.component.model";
 import {RecordsService} from "../records.service";
 import {TokenService} from "../token.service";
-import {PreferencesService} from "../preferences/preferences.service";
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('gameModal') gameModal: ElementRef;
-  //public Pref$: Subject<Preferences> = new Subject<Preferences>();
-  public Pref$: Observable<Preferences>;
   public cardsPref: number;
   public timePref: number;
-  public points = 0;
-  public seconds;
-  public numPairsFind = 0;
-  public msg;
+  public points:number = 0;
+  public disposedTime: number = 0;
+  public numPairsFind: number = 0;
+  public msg: string;
   public cardSrc: string[] = [];
   public imgSrc: string[] = [];
   public saveRecord: string = '';
+  public timerGame;
 
-  private PENALIZER = 700;
-  private CARD_BACK = 8;
-  private timerGame;
+  private PENALIZER: number = 700;
+  private CARD_BACK: number = 8;
+  private pair: boolean = false;
+  private differentPairs: number;
   private cardPlay;
   private timerPenalize;
-  private pair = false;
-  private differentPairs;
   private allCards: string[] = ['assets/bastos1.jpg', "assets/bastos12.jpg", "assets/copas1.jpg",
     "assets/copas12.jpg", "assets/espadas1.jpg", "assets/espadas12.jpg",
     "assets/oros1.jpg", "assets/oros12.jpg", "assets/reverso.jpg"];
 
 
   constructor(private recordsService: RecordsService,
-              private tokenService: TokenService,
-              private prefService: PreferencesService) {  }
+              private tokenService: TokenService) {  }
 
   ngOnInit(): void {
-    this.Pref$ = this.prefService.getPreferences$();
-    this.Pref$.subscribe( value => {
-      console.log("value: " + value.cards + ' ' + value.time);
-      this.cardsPref = value.cards;
-      this.timePref = value.time;
-    });
+    this.cardsPref = parseInt(localStorage.getItem('cardsPref'));
+    this.timePref = parseInt(localStorage.getItem('timePref'));
 
     this.timePref === undefined ? this.timePref = 0 : this.timePref;
     this.cardsPref === undefined ? this.cardsPref = 20 : this.cardsPref;
     this.cardsPref === 20 ? this.differentPairs = 5 :
       this.cardsPref === 26 ? this.differentPairs = 6 : this.differentPairs = 8;
-    this.timePref = 3;
+
     console.log('pref: ' + this.cardsPref + ' ' + this.timePref);
     this.createTable();
   }
@@ -78,25 +70,24 @@ export class PlayComponent implements OnInit {
   }
 
   public crono() {
-    //this.seconds = this.timePref;
-    this.seconds = 5;
+    //this.timePref = 2;
+    let context = this;
+    let seconds = this.timePref;
+    this.disposedTime = seconds;
     function showTime() {
-     //console.log(timerGame);
-      if (this.seconds < 0) {
+      context.disposedTime = seconds;
+      if (seconds <= 0) {
         this.msg = '¡ SE ACABO EL TIEMPO !' + '\n';
-        clearInterval(this.timerGame);
-        this.endGame();
-        //return;
+        context.endGame();
       }
-      this.seconds--;
-     //console.log(3+'seg: ' + this.seconds);
+      seconds--;
     }
-    let timerGame = setInterval(showTime, 1000);
+
+    this.timerGame = setInterval(showTime, 1000);
   }
 
   public onclickCard(id: number){
     this.imgSrc[id] = this.cardSrc[id];
-    //this.endGame();
 
     if (this.pair !== false){
       if (this.cardSrc[id] === this.cardPlay.src) {
@@ -134,16 +125,21 @@ export class PlayComponent implements OnInit {
   }
 
   private endGame() {
-    // clearInterval(this.timerGame);
+    clearInterval(this.timerGame);
     this.points = this.cardsPref === 26 ? this.points + 25 : this.cardsPref === 32 ? this.points + 50 : this.points;
     this.points = this.timePref === 60 ? this.points + 100 : this.timePref === 90 ? this.points + 75 :
       this.timePref === 120 ? this.points + 50 : this.timePref === 150 ? this.points + 25 : this.points;
 
     if (this.tokenService.exist) {
-      //Modal permita elegir si aceptas
+      //setTimeout(function() {
+        //this.gameModal.nativeElement.show();
+      //}, 1000);
+      /*document.getElementById("acceptModal").addEventListener('click',function () {
+          document.getElementById("play").click();
+        });*/
+
       console.log("newREg")
-      //////////////////////////////////////////
-      let jsonNewRecord = {punctuation: this.points, cards: this.cardsPref, disposedTime: this.timePref};
+      let jsonNewRecord = {punctuation: this.points, cards: this.cardsPref, disposedTime: this.disposedTime};
       this.recordsService.newRecordService(this.tokenService.token, jsonNewRecord).subscribe(
         value => {
           this.saveRecord = 'Record guardado';
@@ -151,13 +147,9 @@ export class PlayComponent implements OnInit {
         }
       )
     }
+  }
 
-    //this.gameModal.nativeElement.show();
-    //setTimeout(function() {
-      //$("#gameModal").modal("show");
-    //}, 1000);
-    /*document.getElementById("acceptModal").addEventListener('click',function () {
-      document.getElementById("play").click();
-    });*/
+  ngOnDestroy() : void {
+    clearInterval(this.timerGame);
   }
 }

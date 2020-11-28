@@ -9,9 +9,9 @@ import {TokenService} from "../token.service";
   styleUrls: ['./records.component.scss']
 })
 export class RecordsComponent implements OnInit, OnDestroy {
-  public records: [Object];
-  public userRecords;
   public message: string = '';
+  public records;
+  public userRecords;
   private subscriptions = [];
 
   constructor(private recordsService: RecordsService,
@@ -21,13 +21,14 @@ export class RecordsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const topTen = this.recordsService.topTenService().subscribe(
       value => {
-        // @ts-ignore
         this.records = value;
         for (let r of this.records) {
           let date = new Date(r['recordDate']);
           let recordDate = date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear();
           r['recordDate'] = recordDate;
         }
+      }, error => {
+        console.log(error.status);
       }
     );
     this.subscriptions.push(topTen);
@@ -42,6 +43,8 @@ export class RecordsComponent implements OnInit, OnDestroy {
             let recordDate = date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear();
             ur['recordDate'] = recordDate;
           }
+        }, err => {
+          console.log(err.status)
         }
       )
       this.subscriptions.push(userTopTen);
@@ -52,6 +55,7 @@ export class RecordsComponent implements OnInit, OnDestroy {
     const deleteRecords = this.recordsService.deleteUserRecordsService(this.tokenService.getToken()).subscribe(
       value => {
         this.message = 'Datos eliminados correctamente';
+        this.userRecords = [];
       }, error => {
         error.status === 401 ? this.message = 'El token no es correcto' :
         this.message = 'Error al eliminar los datos';

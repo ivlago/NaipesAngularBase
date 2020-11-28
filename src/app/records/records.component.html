@@ -40,7 +40,6 @@
             <button id="btnPref" type="button" class="btn btn-info ml-1" (click)="borrarUserRecords()"> Borrar </button>
           </h3>
           <div class="row pt-2 justify-content-center records">
-            <ng-container *ngIf="message !== ''"> {{ message }}</ng-container>
             <table class="table table-striped">
               <thead>
               <tr>
@@ -65,6 +64,7 @@
               </ng-container>
               </tbody>
             </table>
+            <ng-container *ngIf="message !== ''"> {{ message }}</ng-container>
           </div>
         </div>
       </div>
