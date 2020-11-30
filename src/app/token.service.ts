@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Route, Router} from "@angular/router";
+import { Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,12 @@ export class TokenService {
   }
 
   public destroyToken() {
-    console.log("destroyToken");
     this.token = '';
     this.exist = false;
     this.router.navigate(['/home']);
   }
 
   public getToken() {
-    console.log("get: " + this.token)
     return this.token;
   }
 }

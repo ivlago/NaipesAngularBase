@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log("login: " + value);
       }, err => {
         this.error = true;
-        console.log('error: '+ err.toString());
       })
     this.subscriptions.push(login);
   }

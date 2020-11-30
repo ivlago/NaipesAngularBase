@@ -1,25 +1,3 @@
-<ng-template id="gameModal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="titleModal" class="modal-title"> {{ msg }} </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="contentModal" class="modal-body text-center">
-        'Tu puntuación ha sido: ' {{ this.points }}  '\n ¿Quieres volver a jugar?'
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button id="acceptModal" type="button" class="btn btn-primary" data-dismiss="modal"
-                routerLink="/play"> Aceptar </button>
-        <button id="cancelModal" type="button" class="btn btn-secondary" data-dismiss="modal"
-                routerLink="/home"> Cerrar </button>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
 <div class="container">
   <div class="row mb-3 justify-content-center">
     <div class="col-3">
@@ -47,24 +25,38 @@
     </div>
     <div class="col-9">
       <div class="mt-4 h-100">
-        <div id="table" [ngClass]="numPairsFind === cardsPref/2 ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100 put_in_table">
-<!--        <div id="table" class="container table rounded background h-100">-->
+        <div id="table" [ngClass]="numPairsFind === cardsPref/2 || blockClick ? 'blockClick' : 'reactiveClick'" class="container table rounded background h-100 put_in_table">
           <ng-container *ngFor="let card of cardSrc; let numCard = index">
             <div>
-              <img (click)="onclickCard(numCard)" [id]="numCard" class="cards" src="{{imgSrc[numCard]}}">
+              <img (click)="onclickCard(numCard)" [id]="numCard" class="cards" src="{{imgSrc[numCard]}}"
+                   [ngClass]="imgSrc[numCard] !== allCards[CARD_BACK] ? 'blockClick' : null">
             </div>
           </ng-container>
         </div>
       </div>
     </div>
-    <ng-container *ngIf="tokenService.exist">
-      <div class=" justify-content-center">¿Desea guardar la partida?
-        <button id="accept" type="button" class="btn btn-primary" data-dismiss="modal"
-                (click)="restart()"> Aceptar </button>
-        <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal"
-                routerLink="/home"> Cerrar </button>
-      </div>
-    </ng-container>
     <ng-container *ngIf="saveRecord !== ''"> {{ saveRecord }}</ng-container>
   </div>
 </div>
+
+<ng-template #gameModal let-modal class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="titleModal" class="modal-title"> {{ msg }} </h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="contentModal" class="modal-body text-center">
+         ¿Quieres guardar el resultado?
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button id="acceptModal" type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="modal.close(); restart()"> Aceptar </button>
+        <button id="cancelModal" type="button" class="btn btn-secondary" data-dismiss="modal"
+                routerLink="/home" (click)="modal.close()"> Cancelar </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

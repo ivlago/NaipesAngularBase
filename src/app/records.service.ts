@@ -28,11 +28,9 @@ export class RecordsService {
         .set('Authorization', token)
     };
     return this.http.post(this.baseurl + '/records', jsonNewRecord, options);
-    // "punctuation=12&cards=13&disposedTime=14"
   }
 
   public deleteUserRecordsService(token: string) {
-    console.log('borra userRegister');
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
                                 .set('Authorization', token)

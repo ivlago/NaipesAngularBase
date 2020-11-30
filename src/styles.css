@@ -1,114 +1,49 @@
-app-header i {
-  border-radius: 50%;
-  -webkit-transition: -webkit-transform .6s ease-in-out;
-  transition: transform .6s ease-in-out; }
-app-header i:hover {
-  -webkit-transform: rotate(360deg);
-  transform: rotate(360deg); }
+/*
+Error: File to import not found or unreadable: ~bootstrap/scss/bootstrap.
+        on line 4 of styles.scss
 
-app-play .put_in_table {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start; }
-app-play .cards {
-  margin: 0.5rem;
-  bottom: 0.5rem;
-  left: 3rem;
-  min-width: 5rem;
-  min-height: 6rem; }
+1: @import './app/app.component.scss';
+2: 
+3: /* Importing Bootstrap SCSS file. *\/
+4: @import '~bootstrap/scss/bootstrap';
 
-.content {
-  height: 78vh; }
-
-.background {
-  background-color: aquamarine; }
-
-.pointer {
-  cursor: pointer; }
-
-.blockClick {
-  pointer-events: none; }
-
-.reactiveClick {
-  pointer-events: auto; }
-
-img {
-  cursor: pointer;
-  height: 6rem;
-  width: 4rem;
-  padding: 0.2rem; }
-
-.table {
-  display: table;
-  margin: auto; }
-
-.td_center {
-  padding: 0.5rem !important;
-  text-align: center; }
-
-.records {
-  overflow-y: scroll;
-  max-height: 60vh;
-  margin: 0 0.5rem; }
-
-.card {
-  padding: 10px; }
-
-.card_score {
-  height: 40%;
-  margin-bottom: 4rem;
-  margin-top: 4rem; }
-
-.card_total {
-  height: 20%; }
-
-.in_content {
-  border-style: dotted;
-  border-color: darkslategrey;
-  height: 100%; }
-
-.in_card {
-  border-style: dotted;
-  border-color: darkslategrey;
-  width: 100%; }
-
-.grid {
-  display: grid; }
-
-.miw {
-  background-image: url(https://avatars0.githubusercontent.com/u/5365410?s=460&v=4);
-  background-repeat: no-repeat;
-  background-position: center;
-  min-width: 4rem;
-  min-height: 1.7rem;
-  background-size: 100%; }
-
-.upm {
-  position: absolute;
-  background-image: url(https://landportal.org/sites/landportal.org/files/styles/220heightmax/public/LogoUPM.png?itok=7tRHb6Zl);
-  background-repeat: no-repeat;
-  background-position: center;
-  min-width: 4rem;
-  min-height: 6rem;
-  background-size: 100%; }
-
-.upm-left {
-  top: 0;
-  left: 1rem; }
-
-.upm-right {
-  bottom: 0;
-  right: 1rem; }
-
-@font-face {
-  font-family: title_font;
-  font-style: italic;
-  font-weight: 300;
-  src: local("Zilla Slab Light Italic"), local("ZillaSlab-LightItalic"), url(https://fonts.gstatic.com/s/zillaslab/v6/dFanZfeM_74wlPZtksIFaj8CVHaZWXB3.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-.title {
-  top: 0.7rem;
-  font-family: title_font; }
-
-/*# sourceMappingURL=styles.css.map */
+Backtrace:
+styles.scss:4
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:67:in `rescue in import'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:45:in `import'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:28:in `imported_file'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/import_node.rb:37:in `css_import?'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:161:in `visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:10:in `visit'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/engine.rb:307:in `render_with_sourcemap'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/sass_scss.rb:391:in `run'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/sass_scss.rb:63:in `process_result'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/base.rb:52:in `parse'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/base.rb:19:in `parse!'
+C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/sass-3.5.1/bin/sass:13:in `<top (required)>'
+C:/RailsInstaller/Ruby2.3.3/bin/sass:23:in `load'
+C:/RailsInstaller/Ruby2.3.3/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: ~bootstrap/scss/bootstrap.\A         on line 4 of styles.scss\A \A 1: @import './app/app.component.scss';\A 2: \A 3: /* Importing Bootstrap SCSS file. */\A 4: @import '~bootstrap/scss/bootstrap';"; }

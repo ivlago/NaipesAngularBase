@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public sendRegister() {
-    // if (this.user.value['password'] === this.user.value['password2']) {
     const register = this.registerService.registerService(this.user.value).subscribe(
       value1 => {
         console.log("notrepeat: " + value1);
@@ -47,9 +46,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.menssageError = ' Se ha producido un error en el registro ';
       })
     this.subscriptions.push(register);
-/*  }  else{
-      this.menssageError = ' Las contraseñas no son iguales ';
-    }*/
   }
 
   ngOnDestroy() : void {
