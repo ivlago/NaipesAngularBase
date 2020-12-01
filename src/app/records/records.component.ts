@@ -36,8 +36,9 @@ export class RecordsComponent implements OnInit, OnDestroy {
     if (this.userService.userLog !== undefined) {
       let token = this.tokenService.getToken();
       const userTopTen = this.recordsService.userTopTenService(this.userService.userLog, token).subscribe(
-        value => {
-          this.userRecords = value;
+        observe => {
+          this.tokenService.saveToken(observe.headers.get('Authorization'));
+          this.userRecords = observe.body;
           for (let ur of this.userRecords) {
             let date = new Date(ur['recordDate']);
             let recordDate = date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear();
@@ -53,7 +54,7 @@ export class RecordsComponent implements OnInit, OnDestroy {
 
   public borrarUserRecords() {
     const deleteRecords = this.recordsService.deleteUserRecordsService(this.tokenService.getToken()).subscribe(
-      value => {
+      observe => {
         this.message = 'Datos eliminados correctamente';
         this.userRecords = [];
       }, error => {

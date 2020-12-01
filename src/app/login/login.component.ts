@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   public userLogin() {
     const login = this.loginService.userLoginService(this.login.value).subscribe(
       value => {
-        this.auth = value;
-        this.tokenService.saveToken(value.toString());
+        this.auth = value.body;
+        this.tokenService.saveToken(value.body.toString());
         this.error = false;
-        console.log("login: " + value);
+        console.log("login: " + value.body);
       }, err => {
         this.error = true;
       })

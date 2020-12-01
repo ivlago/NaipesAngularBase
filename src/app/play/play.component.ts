@@ -119,7 +119,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   public restart() {
     let jsonNewRecord = {punctuation: this.points, cards: this.cardsPref, disposedTime: this.timePref};
     this.recordsService.newRecordService(this.tokenService.token, jsonNewRecord).subscribe(
-      value => {
+      observe => {
+        this.tokenService.saveToken(observe.headers.get('Authorization'));
         this.saveRecord = 'Record guardado';
       }
     )

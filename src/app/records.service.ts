@@ -15,26 +15,20 @@ export class RecordsService {
   }
 
   public userTopTenService(userLog: string, token: string) {
-    let options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-                                .set('Authorization', token)
-    };
-    return this.http.get(this.baseurl + '/records/' + userLog, options);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                .set('Authorization', token);
+    return this.http.get(this.baseurl + '/records/' + userLog, {headers, observe: 'response'});
   }
 
   public newRecordService(token: string, jsonNewRecord: any) {
-    let options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-        .set('Authorization', token)
-    };
-    return this.http.post(this.baseurl + '/records', jsonNewRecord, options);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+    return this.http.post(this.baseurl + '/records', jsonNewRecord, {headers, observe: 'response'});
   }
 
   public deleteUserRecordsService(token: string) {
-    let options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-                                .set('Authorization', token)
-    };
-    return this.http.delete(this.baseurl + '/records', options);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                .set('Authorization', token);
+    return this.http.delete(this.baseurl + '/records', {headers});
   }
 }
