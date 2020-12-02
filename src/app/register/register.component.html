@@ -24,7 +24,8 @@
             <label for="keyRepeat"> Repita la clave:  </label>
             <input id="keyRepeat" type="text" placeholder="  Repita la clave" formControlName="password2" required >
           </p>
-          <ng-container *ngIf="user.value['password'] !== user.value['password2']"> Las contraseñas son distintas </ng-container>
+          <ng-container *ngIf="user.value['password'] !== user.value['password2'] && user.value['password2'] !== ''">
+                        Las contraseñas son distintas </ng-container>
           <ng-container *ngIf="menssageError !== ''"><p> {{ menssageError }}</p></ng-container>
           <button class="btn btn-info" type="button" (click)="sendRegister()"
                     [disabled]="user.value['password'] !== user.value['password2'] ? true : user.invalid">

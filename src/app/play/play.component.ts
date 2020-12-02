@@ -17,10 +17,9 @@ export class PlayComponent implements OnInit, OnDestroy {
   public points:number = 0;
   public disposedTime: number = 0;
   public numPairsFind: number = 0;
-  public msg: string;
+  public msg: string = '';
   public cardSrc: string[] = [];
   public imgSrc: string[] = [];
-  public saveRecord: string = '';
   public blockClick: boolean = false;
   public timerGame;
 
@@ -121,21 +120,25 @@ export class PlayComponent implements OnInit, OnDestroy {
     this.recordsService.newRecordService(this.tokenService.token, jsonNewRecord).subscribe(
       observe => {
         this.tokenService.saveToken(observe.headers.get('Authorization'));
-        this.saveRecord = 'Record guardado';
+        this.msg = 'Record guardado';
       }
     )
   }
 
   private endGame() {
     clearInterval(this.timerGame);
-    this.points = this.cardsPref === 26 ? this.points + 25 : this.cardsPref === 32 ? this.points + 50 : this.points;
-    this.points = this.timePref === 60 ? this.points + 100 : this.timePref === 90 ? this.points + 75 :
-      this.timePref === 120 ? this.points + 50 : this.timePref === 150 ? this.points + 25 : this.points;
-
+    if (this.msg !== '¡ SE ACABO EL TIEMPO !' + '\n') {
+      this.points = this.cardsPref === 26 ? this.points + 25 : this.cardsPref === 32 ? this.points + 50 : this.points;
+      this.points = this.timePref === 60 ? this.points + 100 : this.timePref === 90 ? this.points + 75 :
+        this.timePref === 120 ? this.points + 50 : this.timePref === 150 ? this.points + 25 : this.points;
+    }
     if (this.tokenService.exist && this.numPairsFind === this.cardsPref/2) {
       this.modalService.open(this.gameModal);
     }else{
-      this.router.navigate(['/home']);
+      this.blockClick = true;
+/*      setTimeout(() =>{
+        this.router.navigate(['/home']);
+      }, 10000);*/
     }
   }
 

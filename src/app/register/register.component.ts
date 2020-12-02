@@ -25,15 +25,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public userValid() {
-    const userValid = this.registerService.userService(this.user.value).subscribe(
-      value => {
-        this.menssageError = '"' + value + '" no está disponible ';
-      }, err => {
-        if (err.status === 404) {
-          this.menssageError = ' Nombre de usuario válido ';
-        }
-      })
-    this.subscriptions.push(userValid);
+      const userValid = this.registerService.userService(this.user.value).subscribe(
+        value => {
+          this.menssageError = '"' + value + '" no está disponible ';
+        }, err => {
+          if (err.status === 404) {
+            this.menssageError = ' Nombre de usuario válido ';
+          }
+        })
+      this.subscriptions.push(userValid);
   }
 
   public sendRegister() {
